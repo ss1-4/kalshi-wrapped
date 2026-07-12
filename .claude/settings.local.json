@@ -1,8 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(mkdir -p /Users/sohansahota/Desktop/WC26.3/match-report/.claude)",
-      "Bash(python3 -c \"print\\('python3 available'\\)\")"
-    ]
-  }
-}
