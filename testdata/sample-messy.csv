@@ -1,0 +1,47 @@
+ticker,market_title,avg_price,realized_pnl,status,created_time
+KXWCGAME-26JUN11JPNFRA-JPN,"Will JPN beat FRA?, group stage",18,"($4.76)",settled,2026-06-11T02:13:24Z
+KXWCGAME-26JUN11ESPPOR-ESP,"Will ESP beat POR?, group stage",60,"$1.92",settled,2026-06-11T04:34:54Z
+KXWCGAME-26JUN12MEXFRA-MEX,"Will MEX beat FRA?, group stage",30,"($3.15)",settled,2026-06-12T07:30:24Z
+KXWCGAME-26JUN12MEXGHA-MEX,"Will MEX beat GHA?, group stage",56,"$6.19",settled,2026-06-12T08:36:54Z
+KXWCGAME-26JUN14URUGER-URU,"Will URU beat GER?, group stage",21,"($1.11)",settled,2026-06-14T13:17:06Z
+
+KXWCGAME-26JUN15PORJPN-POR,"Will POR beat JPN?, group stage",60,"($30.84)",settled,2026-06-15T23:01:18Z
+KXWCGAME-26JUN16GHAGER-TIE,"Will GHA vs GER end in a draw?, group stage",56,"$2.11",settled,2026-06-16T17:14:16Z
+KXWCGAME-26JUN17JPNCRO-JPN,"Will JPN beat CRO?, group stage",76,"$11.36",settled,2026-06-17T08:42:42Z
+KXWCGAME-26JUN18JPNKOR-JPN,"Will JPN beat KOR?, group stage",18,"($2.85)",settled,2026-06-18T05:04:25Z
+KXWCGAME-26JUN19BRAGER-BRA,"Will BRA beat GER?, group stage",39,"($4.07)",settled,2026-06-19T20:26:41Z
+KXWCGAME-26JUN20PORCRO-POR,"Will POR beat CRO?, group stage",37,"$3.07",settled,2026-06-20T06:04:34Z
+KXWTAMATCH-26-SABALENKA,"KXWTAMATCH market, SABALENKA, group stage",75,"$3.55",settled,2026-06-20T11:21:41Z
+KXWCGAME-26JUN22GERESP-GER,"Will GER beat ESP?, group stage",28,"($5.88)",settled,2026-06-22T04:50:41Z
+KXWCGAME-26JUN22MEXGHA-MEX,"Will MEX beat GHA?, group stage",37,"($7.73)",settled,2026-06-22T20:23:34Z
+
+KXWCGAME-26JUN26COLMEX-COL,"Will COL beat MEX?, group stage",83,"$2.40",settled,2026-06-26T00:43:07Z
+KXWTAMATCH-26-SABALENKA,"KXWTAMATCH market, SABALENKA, group stage",12,"($0.64)",settled,2026-06-26T17:17:33Z
+KXWCGAME-26JUN26SENCRO-SEN,"Will SEN beat CRO?, group stage",17,"($1.80)",settled,2026-06-26T19:47:48Z
+KXWCGAME-26JUN28ENGSEN-TIE,"Will ENG vs SEN end in a draw?, group stage",73,"$2.56",settled,2026-06-28T06:08:44Z
+KXWCGAME-26JUN28BRAMEX-BRA,"Will BRA beat MEX?, group stage",24,"($2.53)",settled,2026-06-28T06:15:37Z
+KXWCGAME-26JUN28GHASEN-GHA,"Will GHA beat SEN?, group stage",27,"($14.19)",settled,2026-06-28T06:24:57Z
+KXWCGAME-26JUN28SENPOR-TIE,"Will SEN vs POR end in a draw?, group stage",44,"$2.71",settled,2026-06-28T18:03:30Z
+KXWCGAME-26JUN30FRAPOR-FRA,"Will FRA beat POR?, group stage",19,"$11.99",settled,2026-06-30T05:11:06Z
+KXWCGAME-26JUN30NEDARG-NED,"Will NED beat ARG?, group stage",19,"($4.02)",settled,2026-06-30T06:09:58Z
+
+KXWCGAME-26JUN30CROFRA-CRO,"Will CRO beat FRA?, group stage",42,"$5.63",settled,2026-06-30T07:35:03Z
+KXWTAMATCH-26-SABALENKA,"KXWTAMATCH market, SABALENKA, group stage",43,"$8.29",settled,2026-07-01T21:35:38Z
+KXUFC-26-JONES,"KXUFC market, JONES, group stage",88,"$1.13",settled,2026-07-02T17:03:28Z
+KXWCGAME-26JUL03FRAMEX-FRA,"Will FRA beat MEX?, group stage",64,"$8.60",settled,2026-07-03T03:31:03Z
+KXWCGAME-26JUL04FRAGER-TIE,"Will FRA vs GER end in a draw?, group stage",37,"$30.68",settled,2026-07-04T07:42:03Z
+KXWCGAME-26JUL05ESPGHA-ESP,"Will ESP beat GHA?, group stage",81,"$3.58",settled,2026-07-05T08:27:48Z
+KXWCGAME-26JUL07ARGNED-ARG,"Will ARG beat NED?, group stage",53,"($8.21)",settled,2026-07-07T14:10:06Z
+KXWCGAME-26JUL07ENGUSA-ENG,"Will ENG beat USA?, group stage",56,"$8.26",settled,2026-07-07T18:00:59Z
+KXWCGAME-26JUL08ENGKOR-ENG,"Will ENG beat KOR?, group stage",14,"($2.23)",settled,2026-07-08T12:21:02Z
+
+KXWTAMATCH-26-GAUFF,"KXWTAMATCH market, GAUFF, group stage",28,"$34.78",settled,2026-07-09T10:13:44Z
+KXWCGAME-26JUL12CROJPN-CRO,"Will CRO beat JPN?, group stage",54,"$22.13",settled,2026-07-12T20:07:48Z
+KXWCGAME-26JUL13GHAMAR-GHA,"Will GHA beat MAR?, group stage",37,"($19.32)",settled,2026-07-13T10:31:40Z
+KXWCGAME-26JUL14KORURU-KOR,"Will KOR beat URU?, group stage",17,"($0.90)",settled,2026-07-14T00:55:38Z
+KXUFC-26-PEREIRA,"KXUFC market, PEREIRA, group stage",46,"($23.87)",settled,2026-07-14T12:29:00Z
+KXWCGAME-26JUL14BRANED-BRA,"Will BRA beat NED?, group stage",52,"$9.25",settled,2026-07-14T14:18:16Z
+KXWCGAME-26JUL16SENESP-SEN,"Will SEN beat ESP?, group stage",81,"$1.79",settled,2026-07-16T06:16:56Z
+KXWCGAME-26JUL17GERCOL-GER,"Will GER beat COL?, group stage",36,"($9.40)",settled,2026-07-17T09:58:37Z
+KXWCGAME-26-PENDING,"Still open, no result",55,,open,
+,,,,,
