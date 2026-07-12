@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Match Report — your Kalshi trades as a ticket stub</title>
-<meta name="description" content="Turn your Kalshi trade history into a shareable, stadium-ticket-styled stat card. Runs entirely in your browser.">
+<title>Kalshi Wrapped — your 2026 World Cup trades, wrapped</title>
+<meta name="description" content="All your 2026 Kalshi World Cup trades, wrapped into a shareable fullscreen story. Runs entirely in your browser.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -77,29 +77,6 @@
     flex-direction: column;
     align-items: center;
   }
-
-  /* ---------- Language pill ---------- */
-
-  .lang-pill {
-    position: fixed;
-    top: 16px;
-    right: 16px;
-    z-index: 100;
-    min-height: 44px;
-    background: rgba(10, 31, 26, 0.7);
-    border: 1px solid var(--pitch-line);
-    border-radius: 999px;
-    color: var(--chalk);
-    font-family: "Inter", sans-serif;
-    font-size: 13px;
-    font-weight: 500;
-    letter-spacing: 0.04em;
-    padding: 8px 16px;
-    cursor: pointer;
-    transition: border-color 120ms ease, background-color 120ms ease;
-  }
-  .lang-pill:hover { border-color: var(--muted); background: rgba(30, 82, 64, 0.45); }
-  .lang-pill:focus-visible { outline: 2px solid var(--muted); outline-offset: 2px; }
 
   /* ---------- Landing ---------- */
 
@@ -297,7 +274,6 @@
   }
   .show.is-open { display: block; }
 
-  /* ---------- Progress bar ---------- */
   .show-progress {
     position: fixed;
     bottom: 0; left: 0;
@@ -315,13 +291,12 @@
     transition: width 400ms ease;
   }
 
-  /* ---------- Chrome ---------- */
   .show-exit {
     position: fixed;
     top: 20px; right: 20px;
     width: 44px; height: 44px;
     z-index: 10009;
-    background: rgba(0, 0, 0, 0.3);
+    background: rgba(0, 0, 0, 0.35);
     border: none;
     border-radius: 50%;
     color: #fff;
@@ -339,14 +314,14 @@
     top: 20px; left: 20px;
     min-width: 44px; min-height: 44px;
     z-index: 10009;
-    background: rgba(0, 0, 0, 0.3);
+    background: rgba(0, 0, 0, 0.35);
     border: none;
     border-radius: 999px;
     color: #fff;
     font-family: "Inter", sans-serif;
     font-size: 13px;
     font-weight: 500;
-    padding: 10px 16px;
+    padding: 10px 18px;
     display: none;
     align-items: center;
     gap: 7px;
@@ -357,7 +332,6 @@
   .show-exit:hover, .show-share:hover { background: rgba(0, 0, 0, 0.55); }
   .show-exit:focus-visible, .show-share:focus-visible { outline: 2px solid var(--muted); outline-offset: 2px; }
 
-  /* ---------- Slides ---------- */
   .slide {
     position: absolute;
     inset: 0;
@@ -390,12 +364,12 @@
 
   .slide.is-active .slide-frame { animation: frameInR 380ms cubic-bezier(0.2, 0.8, 0.2, 1) 100ms both; }
   .slide.is-active.from-left .slide-frame { animation-name: frameInL; }
-  .slide.is-exiting .slide-frame { animation: frameOutL 220ms ease both; }
+  .slide.is-exiting .slide-frame { animation: frameOutL 200ms ease both; }
   .slide.is-exiting.to-right .slide-frame { animation-name: frameOutR; }
-  @keyframes frameInR  { from { opacity: 0; transform: translateX(40px); } }
-  @keyframes frameInL  { from { opacity: 0; transform: translateX(-40px); } }
-  @keyframes frameOutL { to   { opacity: 0; transform: translateX(-40px); } }
-  @keyframes frameOutR { to   { opacity: 0; transform: translateX(40px); } }
+  @keyframes frameInR  { from { opacity: 0; transform: translateX(30px); } }
+  @keyframes frameInL  { from { opacity: 0; transform: translateX(-30px); } }
+  @keyframes frameOutL { to   { opacity: 0; transform: translateX(-30px); } }
+  @keyframes frameOutR { to   { opacity: 0; transform: translateX(30px); } }
 
   .slide-inner {
     display: flex;
@@ -407,7 +381,6 @@
   }
   .slide-inner--q { align-items: flex-start; text-align: left; }
 
-  /* Staggered element entrances */
   .slide .fx, .slide .fx-hero, .slide .fx-flag { opacity: 0; }
   .slide.is-active .fx {
     animation: fxIn 350ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
@@ -431,14 +404,13 @@
     100% { opacity: 1; transform: scale(1); }
   }
 
-  /* ---------- Typography ---------- */
   .sl-eyebrow {
     font-family: "Inter", sans-serif;
     font-size: 12px;
     font-weight: 600;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--gold);
+    color: #E7B341;
   }
   .grule {
     width: 48px;
@@ -467,10 +439,10 @@
 
   .sl-sub  { font-family: "Inter", sans-serif; font-size: 20px; color: var(--muted); margin-top: 14px; }
   .sl-note { font-family: "Inter", sans-serif; font-size: 14px; color: var(--muted); margin-top: 8px; }
+  .persona { font-family: "Inter", sans-serif; font-size: 16px; color: var(--chalk); margin-top: 14px; }
   .sl-gold  { color: var(--gold); }
   .sl-flare { color: var(--flare); }
 
-  /* ---------- Question slides ---------- */
   .q-text {
     font-family: "Inter", sans-serif;
     font-weight: 700;
@@ -480,7 +452,6 @@
     line-height: 1.15;
     margin-top: 10px;
   }
-  .q-text .q-mark { color: #E7B341; }
 
   .tap-hint {
     position: absolute;
@@ -617,6 +588,15 @@
   }
   .top-rec { font-family: "Inter", sans-serif; font-size: 22px; color: var(--chalk); margin-top: 8px; }
   .top-pnl { font-family: "Inter", sans-serif; font-size: 30px; font-weight: 600; margin-top: 6px; }
+  .top-exit {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 20px;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin-top: 16px;
+  }
+  .top-exit--gold { color: var(--gold); }
+  .top-exit-sub { font-family: "Inter", sans-serif; font-size: 14px; color: var(--muted); font-style: italic; margin-top: 4px; }
 
   /* ---------- Slide 8 pills ---------- */
   .pills {
@@ -656,54 +636,83 @@
     transition: width 1100ms cubic-bezier(0.22, 0.61, 0.36, 1) 380ms;
   }
 
-  /* ---------- Slide 16 table ---------- */
-  .slide-frame--table { padding: 60px 24px 80px; align-items: flex-start; }
-  .table-wrap { width: 100%; display: flex; flex-direction: column; align-items: center; }
-  .table-scroll {
+  /* ---------- Slide 16 ranked list ---------- */
+  .rank-list {
     width: 100%;
-    max-width: 480px;
-    max-height: calc(100vh - 160px);
+    max-width: 440px;
+    margin-top: 22px;
+    max-height: calc(100vh - 260px);
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
-    margin: 18px auto 0;
-    cursor: default;
+    padding-right: 14px;
+    scrollbar-width: thin;
   }
-  .team-table { width: 100%; max-width: 480px; margin: 0 auto; border-collapse: collapse; }
-  .team-table th {
-    font-family: "Inter", sans-serif;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--muted);
-    text-align: left;
-    padding: 0 8px 10px;
-    border-bottom: 1px solid rgba(30, 82, 64, 0.5);
-    position: sticky;
-    top: 0;
-    background: #0A1F1A;
-  }
-  .team-table td {
-    padding: 12px 8px;
+  .rank-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    height: 52px;
     border-bottom: 1px solid rgba(30, 82, 64, 0.25);
     text-align: left;
-    font-family: "Inter", sans-serif;
-    font-size: 14px;
-    color: var(--muted);
   }
-  .team-table td.td-name {
+  .rank-num {
     font-family: "Bebas Neue", sans-serif;
-    font-size: 20px;
+    font-size: 32px;
+    color: var(--muted);
+    width: 36px;
+    flex: none;
+  }
+  .rank-flag { font-size: 20px; line-height: 1; flex: none; }
+  .rank-name {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 22px;
     letter-spacing: 0.04em;
     color: var(--chalk);
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
-  .team-table td.td-name .tt-flag { font-size: 18px; margin-right: 8px; }
-  .team-table th:not(:first-child), .team-table td:not(:first-child) { text-align: right; }
-  .team-table tr.tt-top td:first-child { border-left: 3px solid #E7B341; padding-left: 10px; }
-  .team-table td.pnl-pos { color: var(--gold); }
-  .team-table td.pnl-neg { color: var(--flare); }
+  .rank-rec { font-family: "Inter", sans-serif; font-size: 13px; color: var(--muted); flex: none; }
+  .rank-pnl { font-family: "Inter", sans-serif; font-size: 14px; flex: none; min-width: 72px; text-align: right; }
+  .rank-row--top {
+    border-left: 3px solid #E7B341;
+    padding-left: 10px;
+  }
+  .rank-row--top .rank-num, .rank-row--top .rank-name { color: var(--gold); }
+  .rank-more { font-family: "Inter", sans-serif; font-size: 13px; color: var(--muted); margin-top: 12px; }
 
-  /* ---------- Slide 17 ---------- */
+  /* ---------- Slide 17 final ---------- */
+  .exit-label {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: clamp(52px, 9vw, 88px);
+    line-height: 0.9;
+    letter-spacing: 0.02em;
+    margin-top: 10px;
+  }
+  .exit-sub {
+    font-family: "Inter", sans-serif;
+    font-size: 18px;
+    color: var(--chalk);
+    font-style: italic;
+    margin-top: 8px;
+  }
+  .final-record { font-family: "Inter", sans-serif; font-size: 20px; color: var(--muted); margin-top: 16px; }
+  .final-tag {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 28px;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    margin-top: 24px;
+  }
+  .final-unofficial {
+    font-family: "Inter", sans-serif;
+    font-size: 11px;
+    color: #7FA593;
+    margin-top: 20px;
+    text-align: center;
+  }
+
   .show-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 28px; }
   .btn-dl {
     background: #FF5C3E;
@@ -751,200 +760,25 @@
   .btn-dl:focus-visible, .btn-share2:focus-visible, .btn-replay:focus-visible {
     outline: 2px solid var(--chalk); outline-offset: 2px;
   }
-
-  .final-wordmark {
-    font-family: "Bebas Neue", sans-serif;
-    font-size: 15px;
-    letter-spacing: 0.16em;
-    color: #E7B341;
-    margin-top: 20px;
-  }
-  .final-unofficial {
-    font-family: "Inter", sans-serif;
-    font-size: 11px;
-    color: #7FA593;
-    margin-top: 8px;
-    text-align: center;
-  }
-
-  /* ---------- Ticket stub (slide 17) ---------- */
-
-  .card-glow {
-    border-radius: 20px;
-    padding: 1px;
-    background: linear-gradient(160deg, rgba(231, 179, 65, 0.55), rgba(231, 179, 65, 0.08) 40%, rgba(30, 82, 64, 0.5));
-    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55), 0 0 44px rgba(231, 179, 65, 0.07);
-  }
-
-  .ticket {
-    width: 340px;
-    max-width: calc(100vw - 48px);
-    border-radius: 19px;
-    background:
-      radial-gradient(ellipse 120% 55% at 50% -8%, rgba(231, 179, 65, 0.08), transparent 60%),
-      linear-gradient(172deg, var(--pitch-mid) 0%, #0D2A20 58%, var(--pitch-dark) 100%);
-    color: var(--chalk);
-    overflow: hidden;
-    text-align: left;
-  }
-
-  .ticket-top { padding: 22px 22px 6px; }
-
-  .ticket-head {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .badge {
-    font-family: "Bebas Neue", sans-serif;
-    font-size: 13px;
-    letter-spacing: 0.16em;
-    color: var(--pitch-dark);
-    background: var(--gold);
-    border-radius: 4px;
-    padding: 3px 8px 2px;
-  }
-  .handle { font-size: 12px; font-weight: 500; color: var(--muted); letter-spacing: 0.04em; }
-
-  .record-row {
-    display: flex;
-    align-items: baseline;
-    gap: 12px;
-    margin-top: 18px;
-  }
-  .record {
-    font-family: "Bebas Neue", sans-serif;
-    font-size: 88px;
-    line-height: 0.85;
-    letter-spacing: 0.02em;
-  }
-  .record-label {
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
-
-  .rate-line { margin-top: 12px; font-size: 14px; color: var(--muted); }
-  .rate-line strong { color: var(--chalk); font-weight: 600; }
-
-  .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; padding-bottom: 18px; }
-  .tag {
-    font-family: "Bebas Neue", sans-serif;
-    font-size: 14px;
-    letter-spacing: 0.1em;
-    color: var(--chalk);
-    background: rgba(30, 82, 64, 0.55);
-    border: 1px solid var(--pitch-line);
-    border-left: 3px solid var(--gold);
-    border-radius: 3px;
-    padding: 4px 9px 3px;
-    text-transform: uppercase;
-  }
-
-  .perf {
-    position: relative;
-    height: 26px;
-    background-image: radial-gradient(circle at center, var(--pitch-dark) 2.6px, transparent 3.2px);
-    background-size: 14px 26px;
-    background-repeat: repeat-x;
-    background-position: 20px center;
-  }
-  .perf::before, .perf::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    width: 26px;
-    height: 26px;
-    border-radius: 50%;
-    background: var(--pitch-dark);
-    transform: translateY(-50%);
-  }
-  .perf::before { left: -14px; }
-  .perf::after  { right: -14px; }
-
-  .ticket-bottom { padding: 8px 22px 20px; }
-
-  .stat-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-  }
-  .stat {
-    background: rgba(10, 31, 26, 0.55);
-    border: 1px solid var(--pitch-line);
-    border-radius: 10px;
-    padding: 14px;
-  }
-  .stat-label {
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
-  .stat-value {
-    font-family: "Bebas Neue", sans-serif;
-    font-size: 34px;
-    line-height: 1;
-    margin-top: 8px;
-  }
-  .stat-sub { font-size: 11px; color: var(--muted); margin-top: 5px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .stat--gold .stat-value  { color: var(--gold); }
-  .stat--flare .stat-value { color: var(--flare); }
-
-  .stat--wide { grid-column: 1 / -1; }
-
-  .cal-head { display: flex; justify-content: space-between; align-items: baseline; }
-  .cal-score { font-family: "Bebas Neue", sans-serif; font-size: 26px; line-height: 1; color: var(--gold); }
-  .cal-track {
-    margin-top: 10px;
-    height: 8px;
-    border-radius: 999px;
-    background: rgba(30, 82, 64, 0.55);
-    overflow: hidden;
-  }
-  .cal-fill {
-    height: 100%;
-    width: 0%;
-    border-radius: 999px;
-    background: linear-gradient(90deg, var(--pitch-line), var(--gold));
-    transition: width 700ms ease;
-  }
-  .cal-note { font-size: 11px; color: var(--muted); margin-top: 8px; }
-
-  .ticket-foot {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 16px;
-    padding-top: 14px;
-    border-top: 1px solid var(--pitch-line);
-  }
-  .date-range { font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
-  .wordmark { font-family: "Bebas Neue", sans-serif; font-size: 15px; letter-spacing: 0.14em; color: var(--gold); }
 </style>
 </head>
 <body>
 
-<button class="lang-pill" id="langPill" aria-label="Change language">🇺🇸 EN</button>
-
 <main class="page">
 
-  <div class="eyebrow" id="uiEyebrow">Built for the 2026 World Cup</div>
+  <div class="eyebrow">Built for the 2026 World Cup</div>
 
   <h1>
-    <span id="uiH1a">Your trades.</span>
-    <span class="line-2" id="uiH1b">Your match report.</span>
+    <span>Your trades.</span>
+    <span class="line-2">Your match report.</span>
   </h1>
 
-  <p class="subhead" id="uiSubhead"></p>
+  <p class="subhead">All your 2026 Kalshi trades, wrapped.</p>
 
   <section class="panel" aria-label="Trade data input">
     <div class="dropzone" id="dropzone" role="button" tabindex="0" aria-label="Drop a CSV file here, or click to choose one">
-      <div class="dz-title" id="uiDzTitle">Drop your CSV or JSON export here</div>
-      <div class="dz-hint" id="uiDzHint">or click to choose a file</div>
+      <div class="dz-title">Drop your Kalshi CSV or JSON export here</div>
+      <div class="dz-hint">or click to choose a file</div>
       <div class="dz-file" id="dzFile"></div>
       <input type="file" id="fileInput" accept=".csv,.json,text/csv,application/json,text/plain" hidden>
     </div>
@@ -956,35 +790,32 @@
           <li>Go to kalshi.com and sign in</li>
           <li>Click your profile → Portfolio → History</li>
           <li>Click Export / Download CSV</li>
-          <li>Drop the file here or paste the contents below</li>
+          <li>Drop the file above or paste below</li>
         </ol>
       </div>
     </div>
 
-    <div class="or-rule" id="uiOrRule">or paste it</div>
+    <div class="or-rule">or paste it</div>
 
     <textarea id="csvText" spellcheck="false" placeholder="ticker,result,pnl,price,date&#10;KXWC-BRA,won,12.40,0.62,2026-06-14&#10;KXWC-ARG,lost,-5.00,0.48,2026-06-18&#10;..."></textarea>
 
-    <p class="privacy"><span class="dot" aria-hidden="true"></span><span id="uiPrivacy">Everything runs in your browser. Nothing is uploaded.</span></p>
+    <p class="privacy"><span class="dot" aria-hidden="true"></span>Everything runs in your browser. Nothing is uploaded.</p>
 
-    <button class="cta" id="generateBtn">Generate my card</button>
+    <button class="cta" id="generateBtn">Generate my summary</button>
 
     <div class="error" id="errorBox" role="alert"></div>
   </section>
 
-  <footer class="site">Unofficial. Not affiliated with Kalshi.</footer>
+  <footer class="site">Unofficial. Not affiliated with Kalshi. #KalshiWrapped</footer>
 </main>
 
-<!-- ============================================================
-     Fullscreen slideshow overlay
-============================================================ -->
-<div class="show" id="show" role="dialog" aria-modal="true" aria-label="Your World Cup Wrapped">
+<div class="show" id="show" role="dialog" aria-modal="true" aria-label="Your 2026 World Cup Wrapped">
   <div id="stage"></div>
 </div>
 
 <button class="show-share" id="shareBtn">
   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V3"/><path d="M8 7l4-4 4 4"/><path d="M4 14v5a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5"/></svg>
-  <span id="shareBtnLabel">Share</span>
+  <span>Share</span>
 </button>
 <button class="show-exit" id="exitBtn" aria-label="Exit">&#215;</button>
 <div class="show-progress" aria-hidden="true"><div class="show-progress-fill" id="progressFill"></div></div>
@@ -993,243 +824,7 @@
 (function () {
   "use strict";
 
-  /* ============================================================
-     Language + translations
-  ============================================================ */
-  var SHARE_URL = "https://kalshi-wrapped.github.io";
-
-  var lang = ["es", "pt", "fr"].includes(String(navigator.language || "en").slice(0, 2))
-    ? String(navigator.language).slice(0, 2) : "en";
-
-  var T = {
-    en: {
-      pill: "🇺🇸 EN",
-      eyebrow: "Built for the 2026 World Cup",
-      h1a: "Your trades.",
-      h1b: "Your match report.",
-      subhead: "Paste your Kalshi trade export — CSV or API JSON — and get a <strong>ticket-stub stat card</strong> — record, streak, biggest call, and how sharp your reads really were. Made for sharing, not spreadsheets.",
-      dz_title: "Drop your CSV or JSON export here",
-      dz_hint: "or click to choose a file",
-      or_rule: "or paste it",
-      privacy: "Everything runs in your browser. Nothing is uploaded.",
-      cta: "Generate my card",
-      q_eyebrow: "2026 World Cup",
-      q_teams: "How many teams did you back?",
-      q_busiest: "When did you go all in?",
-      q_bestcall: "What was your biggest call?",
-      q_longshot: "Did any longshots land?",
-      q_sharp: "How sharp were your reads?",
-      a_record: "Your 2026 World Cup",
-      a_placed: "You placed",
-      a_placed_sub: "bets this tournament",
-      a_teams: "different teams",
-      a_top_team: "Your #1 team",
-      a_also: "Also in your corner",
-      a_busiest: "Your busiest day",
-      a_busiest_sub: "bets placed",
-      a_bestday: "Your best day",
-      a_bestcall: "Your best call",
-      a_longshot_pre: "The odds were",
-      a_longshot_sub: "Nobody saw that coming.",
-      a_sharp_sub: "out of 100",
-      a_allteams: "Every team you backed",
-      a_tap: "Tap to continue",
-      a_nobody: "Nobody saw that coming.",
-      win_rate: "{rate}% win rate",
-      th_team: "Team", th_bets: "Bets", th_record: "W–L", th_pnl: "P&L",
-      btn_download: "Download",
-      btn_share: "Share",
-      btn_again: "Play again",
-      share_copy: {
-        s1:  "{W}–{L} in the 2026 World Cup on Kalshi →",
-        s2:  "I placed {n} bets on the 2026 World Cup →",
-        s4:  "I backed {n} teams this World Cup →",
-        s5:  "{flag}{team} was my ride or die →",
-        s8:  "{n} bets on {date}. I went all in →",
-        s9:  "+{pnl} on {date}. My best day →",
-        s11: "+{pnl} on {market}. Biggest call of my World Cup →",
-        s13: "{odds}¢ longshot. Nobody saw that coming →",
-        s15: "{cal}/100 sharpness. Locked in →",
-        s17: "My 2026 World Cup Wrapped. Generate yours →"
-      }
-    },
-    es: {
-      pill: "🇪🇸 ES",
-      eyebrow: "Creado para el Mundial 2026",
-      h1a: "Tus apuestas.",
-      h1b: "Tu informe de partido.",
-      subhead: "Pega tu exportación de Kalshi — CSV o JSON de la API — y obtén una <strong>tarjeta de estadísticas estilo entrada de estadio</strong>: récord, racha, mejor apuesta y qué tan afiladas fueron tus lecturas. Hecha para compartir, no para hojas de cálculo.",
-      dz_title: "Suelta tu archivo CSV o JSON aquí",
-      dz_hint: "o haz clic para elegir un archivo",
-      or_rule: "o pégalo",
-      privacy: "Todo en tu navegador. Nada se sube.",
-      cta: "Generar mi tarjeta",
-      q_eyebrow: "Mundial 2026",
-      q_teams: "¿A cuántos equipos apostaste?",
-      q_busiest: "¿Cuándo lo apostaste todo?",
-      q_bestcall: "¿Cuál fue tu mejor apuesta?",
-      q_longshot: "¿Algún riesgo valió la pena?",
-      q_sharp: "¿Qué tan preciso fuiste?",
-      a_record: "Tu Mundial 2026",
-      a_placed: "Realizaste",
-      a_placed_sub: "apuestas en el torneo",
-      a_teams: "equipos diferentes",
-      a_top_team: "Tu equipo #1",
-      a_also: "También apostaste por",
-      a_busiest: "Tu día más activo",
-      a_busiest_sub: "apuestas",
-      a_bestday: "Tu mejor día",
-      a_bestcall: "Tu mejor apuesta",
-      a_longshot_pre: "Las probabilidades eran",
-      a_longshot_sub: "Nadie lo vio venir.",
-      a_sharp_sub: "de 100",
-      a_allteams: "Todos tus equipos",
-      a_tap: "Toca para continuar",
-      a_nobody: "Nadie lo vio venir.",
-      win_rate: "{rate}% de aciertos",
-      th_team: "Equipo", th_bets: "Apuestas", th_record: "G–P", th_pnl: "P&L",
-      btn_download: "Descargar",
-      btn_share: "Compartir",
-      btn_again: "Repetir",
-      share_copy: {
-        s1:  "{W}–{L} en el Mundial 2026 →",
-        s2:  "Hice {n} apuestas →",
-        s4:  "Aposté por {n} equipos →",
-        s5:  "{flag}{team} fue mi favorito →",
-        s8:  "{n} apuestas el {date} →",
-        s9:  "+{pnl} el {date} →",
-        s11: "+{pnl} en {market} →",
-        s13: "{odds}¢ de probabilidad →",
-        s15: "{cal}/100 precisión →",
-        s17: "Mi resumen del Mundial →"
-      }
-    },
-    pt: {
-      pill: "🇧🇷 PT",
-      eyebrow: "Feito para a Copa 2026",
-      h1a: "Suas apostas.",
-      h1b: "Seu relatório de jogo.",
-      subhead: "Cole sua exportação da Kalshi — CSV ou JSON da API — e receba um <strong>cartão de estatísticas estilo ingresso</strong>: recorde, sequência, melhor aposta e quão precisas foram suas leituras. Feito para compartilhar, não para planilhas.",
-      dz_title: "Solte seu arquivo CSV ou JSON aqui",
-      dz_hint: "ou clique para escolher um arquivo",
-      or_rule: "ou cole aqui",
-      privacy: "Tudo no seu navegador. Nada é enviado.",
-      cta: "Gerar meu cartão",
-      q_eyebrow: "Copa 2026",
-      q_teams: "Quantos times você apoiou?",
-      q_busiest: "Quando você foi com tudo?",
-      q_bestcall: "Qual foi sua maior aposta?",
-      q_longshot: "Algum risco valeu a pena?",
-      q_sharp: "Quão preciso você foi?",
-      a_record: "Sua Copa 2026",
-      a_placed: "Você fez",
-      a_placed_sub: "apostas no torneio",
-      a_teams: "times diferentes",
-      a_top_team: "Seu time #1",
-      a_also: "Você também apoiou",
-      a_busiest: "Seu dia mais ativo",
-      a_busiest_sub: "apostas",
-      a_bestday: "Seu melhor dia",
-      a_bestcall: "Sua melhor aposta",
-      a_longshot_pre: "As chances eram",
-      a_longshot_sub: "Ninguém viu isso vir.",
-      a_sharp_sub: "de 100",
-      a_allteams: "Todos os seus times",
-      a_tap: "Toque para continuar",
-      a_nobody: "Ninguém viu isso vir.",
-      win_rate: "{rate}% de acertos",
-      th_team: "Time", th_bets: "Apostas", th_record: "V–D", th_pnl: "P&L",
-      btn_download: "Baixar",
-      btn_share: "Compartilhar",
-      btn_again: "Jogar de novo",
-      share_copy: {
-        s1:  "{W}–{L} na Copa 2026 →",
-        s2:  "Fiz {n} apostas →",
-        s4:  "Apoiei {n} times →",
-        s5:  "{flag}{team} foi minha escolha →",
-        s8:  "{n} apostas em {date} →",
-        s9:  "+{pnl} em {date} →",
-        s11: "+{pnl} em {market} →",
-        s13: "{odds}¢ de chance →",
-        s15: "{cal}/100 precisão →",
-        s17: "Meu resumo da Copa →"
-      }
-    },
-    fr: {
-      pill: "🇫🇷 FR",
-      eyebrow: "Fait pour la Coupe du Monde 2026",
-      h1a: "Vos paris.",
-      h1b: "Votre rapport de match.",
-      subhead: "Collez votre export Kalshi — CSV ou JSON de l'API — et obtenez une <strong>carte de stats façon ticket de stade</strong> : bilan, série, meilleur pari et la précision de vos analyses. Fait pour partager, pas pour les tableurs.",
-      dz_title: "Déposez votre fichier CSV ou JSON ici",
-      dz_hint: "ou cliquez pour choisir un fichier",
-      or_rule: "ou collez-le",
-      privacy: "Tout dans votre navigateur. Rien n'est envoyé.",
-      cta: "Générer ma carte",
-      q_eyebrow: "Coupe du Monde 2026",
-      q_teams: "Combien d'équipes avez-vous soutenu?",
-      q_busiest: "Quand avez-vous tout misé?",
-      q_bestcall: "Quel était votre meilleur pari?",
-      q_longshot: "Un pari risqué a-t-il payé?",
-      q_sharp: "À quel point étiez-vous précis?",
-      a_record: "Votre Coupe du Monde 2026",
-      a_placed: "Vous avez placé",
-      a_placed_sub: "paris ce tournoi",
-      a_teams: "équipes différentes",
-      a_top_team: "Votre équipe #1",
-      a_also: "Vous avez aussi soutenu",
-      a_busiest: "Votre jour le plus actif",
-      a_busiest_sub: "paris",
-      a_bestday: "Votre meilleur jour",
-      a_bestcall: "Votre meilleur pari",
-      a_longshot_pre: "Les chances étaient",
-      a_longshot_sub: "Personne ne l'avait vu venir.",
-      a_sharp_sub: "sur 100",
-      a_allteams: "Toutes vos équipes",
-      a_tap: "Appuyez pour continuer",
-      a_nobody: "Personne ne l'avait vu venir.",
-      win_rate: "{rate}% de réussite",
-      th_team: "Équipe", th_bets: "Paris", th_record: "V–D", th_pnl: "P&L",
-      btn_download: "Télécharger",
-      btn_share: "Partager",
-      btn_again: "Rejouer",
-      share_copy: {
-        s1:  "{W}–{L} à la Coupe →",
-        s2:  "J'ai placé {n} paris →",
-        s4:  "J'ai soutenu {n} équipes →",
-        s5:  "{flag}{team} était mon équipe →",
-        s8:  "{n} paris le {date} →",
-        s9:  "+{pnl} le {date} →",
-        s11: "+{pnl} sur {market} →",
-        s13: "{odds}¢ →",
-        s15: "{cal}/100 précision →",
-        s17: "Mon bilan de la Coupe →"
-      }
-    }
-  };
-
-  var LANGS = ["en", "es", "pt", "fr"];
-  var LOCALE = { en: "en-US", es: "es-ES", pt: "pt-BR", fr: "fr-FR" };
-
-  function tr(key, vars) {
-    var s = (T[lang] && T[lang][key]) != null ? T[lang][key] : T.en[key];
-    if (s == null) s = "";
-    if (vars) {
-      Object.keys(vars).forEach(function (k) {
-        s = s.split("{" + k + "}").join(vars[k]);
-      });
-    }
-    return s;
-  }
-  function trShare(key, vars) {
-    var s = (T[lang].share_copy && T[lang].share_copy[key]) || T.en.share_copy[key] || "";
-    if (vars) {
-      Object.keys(vars).forEach(function (k) {
-        s = s.split("{" + k + "}").join(vars[k]);
-      });
-    }
-    return s;
-  }
+  var SHARE_URL = "ss1-4.github.io/kalshi-wrapped";
 
   /* ============================================================
      Country + flag mapping
@@ -1276,8 +871,6 @@
     return x ? titleCase(x) : "—";
   }
 
-  /* Look up ticker segments against TEAMS: two codes → "A vs B",
-     one → name + flag, none → cleaned-up ticker text. */
   function cleanTicker(ticker) {
     var s = String(ticker || "").trim().toUpperCase();
     var segs = s.replace(/^KX[A-Z0-9]*-/, "").split("-");
@@ -1294,8 +887,69 @@
       }
     });
     if (codes.length >= 2) return teamName(codes[0]) + " vs " + teamName(codes[1]);
-    if (codes.length === 1) return teamName(codes[0]) + " " + teamFlag(codes[0]);
+    if (codes.length === 1) return teamFlag(codes[0]) + " " + teamName(codes[0]);
     return fallbackClean(s);
+  }
+
+  /* ============================================================
+     World Cup exit bracket
+  ============================================================ */
+  function exitBracket(top) {
+    if (!top) return { label: "Tournament Veteran", sub: "You were there.", tone: "muted" };
+    if (top.name === "TIE" || top.name === "DRAW") {
+      return { label: "The Draw Specialist", sub: "A dying breed. Respect.", tone: "gold" };
+    }
+    var w = top.wins, l = top.losses;
+    if (w === 0) return { label: "Group Stage Exit", sub: "Absolute scenes. At least you showed up.", tone: "flare" };
+    if (w >= 5 || (l === 0 && w >= 4)) return { label: "🏆 World Cup Champion", sub: "Tell absolutely everyone.", tone: "gold" };
+    if (w === 4) return { label: "Runner-Up", sub: "The worst trophy in football.", tone: "chalk" };
+    if (w === 3 && l <= 1) return { label: "Semi-Finalist", sub: "So close it physically hurts.", tone: "chalk" };
+    if (w === 1 && l > w) return { label: "Round of 16", sub: "Respectable. Ish.", tone: "muted" };
+    return { label: "Quarter-Finalist", sub: "You had your moments.", tone: "chalk" };
+  }
+
+  /* ============================================================
+     Personality lines
+  ============================================================ */
+  function teamCountLine(n) {
+    if (n <= 1) return "You picked your side and never wavered.";
+    if (n <= 3) return "You had your favourites and stuck to them.";
+    if (n <= 6) return "You spread the love around.";
+    if (n <= 12) return "You had opinions on a lot of teams.";
+    if (n <= 20) return "You were everywhere this tournament.";
+    return "You basically backed the whole World Cup.";
+  }
+
+  function winRateLine(r) {
+    if (r < 40) return "Tough tournament. The market had other ideas.";
+    if (r <= 50) return "It was close. So close.";
+    if (r <= 60) return "More right than wrong. That counts.";
+    if (r <= 75) return "Solid reads all tournament.";
+    if (r <= 89) return "You knew exactly what you were doing.";
+    return "Nearly perfect. That's not luck.";
+  }
+
+  function busiestLine(n) {
+    if (n <= 3) return "You picked your spots.";
+    if (n <= 5) return "You went all in that day.";
+    if (n <= 7) return "Locked in from first whistle to last.";
+    return "You didn't miss a single match.";
+  }
+
+  function bestCallLine(pnl) {
+    if (pnl < 20) return "Every cent counts.";
+    if (pnl < 100) return "A call worth remembering.";
+    if (pnl < 500) return "That one really paid off.";
+    return "That was the one. Frame it.";
+  }
+
+  function sharpLine(cal) {
+    if (cal < 40) return "The market humbled you. It humbles everyone.";
+    if (cal <= 55) return "Getting there. The reads are sharpening.";
+    if (cal <= 70) return "More right than the odds suggested.";
+    if (cal <= 85) return "Sharp. Genuinely sharp.";
+    if (cal <= 95) return "You were dialled in all tournament.";
+    return "Almost psychic. Statistically suspicious.";
   }
 
   /* ============================================================
@@ -1658,7 +1312,7 @@
   }
 
   function fmtDay(ts) {
-    return new Date(ts).toLocaleDateString(LOCALE[lang], { month: "short", day: "numeric" });
+    return new Date(ts).toLocaleDateString("en-US", { month: "short", day: "numeric" });
   }
 
   /* ============================================================
@@ -1743,33 +1397,6 @@
     }).join("");
   }
 
-  /* ============================================================
-     Language pill + upload screen text
-  ============================================================ */
-  var langPill = document.getElementById("langPill");
-
-  function applyLang() {
-    document.documentElement.lang = lang;
-    langPill.textContent = tr("pill");
-    document.getElementById("uiEyebrow").textContent = tr("eyebrow");
-    document.getElementById("uiH1a").textContent = tr("h1a");
-    document.getElementById("uiH1b").textContent = tr("h1b");
-    document.getElementById("uiSubhead").innerHTML = tr("subhead");
-    document.getElementById("uiDzTitle").textContent = tr("dz_title");
-    document.getElementById("uiDzHint").textContent = tr("dz_hint");
-    document.getElementById("uiOrRule").textContent = tr("or_rule");
-    document.getElementById("uiPrivacy").textContent = tr("privacy");
-    document.getElementById("generateBtn").textContent = tr("cta");
-    document.getElementById("shareBtnLabel").textContent = tr("btn_share");
-  }
-
-  langPill.addEventListener("click", function () {
-    lang = LANGS[(LANGS.indexOf(lang) + 1) % LANGS.length];
-    applyLang();
-  });
-
-  applyLang();
-
   /* ---------- How-to-export guide ---------- */
   var howtoLink = document.getElementById("howtoLink");
   var howtoBody = document.getElementById("howtoBody");
@@ -1844,7 +1471,7 @@
   var shareBtn     = document.getElementById("shareBtn");
   var exitBtn      = document.getElementById("exitBtn");
 
-  var slides = [];     // [{el, bg, shareKey, shareVars, onEnter}]
+  var slides = [];
   var slideIndex = 0;
   var activeDef = null;
   var pendingExit = null;
@@ -1857,11 +1484,10 @@
       (decoHTML || "") +
       '<div class="slide-frame' +
         (opts.q ? " slide-frame--q" : "") +
-        (opts.table ? " slide-frame--table" : "") +
         (opts.scroll ? " slide-frame--scroll" : "") + '">' +
         '<div class="slide-inner' + (opts.q ? " slide-inner--q" : "") + '">' + innerHTML + "</div>" +
       "</div>" +
-      (opts.tapHint ? '<div class="tap-hint">' + escapeHTML(tr("a_tap")) + " →</div>" : "");
+      (opts.tapHint ? '<div class="tap-hint">Tap to continue →</div>' : "");
     stage.appendChild(el);
     return el;
   }
@@ -1871,9 +1497,8 @@
       '<div class="grule' + (left ? " grule--left" : "") + ' fx" style="animation-delay:0ms"></div>';
   }
 
-  function questionHTML(qKey) {
-    var q = escapeHTML(tr(qKey)).replace(/\?\s*$/, '<span class="q-mark">?</span>');
-    return '<div class="q-text fx-hero">' + q + "</div>";
+  function statementHTML(text) {
+    return '<div class="q-text fx-hero">' + escapeHTML(text) + "</div>";
   }
 
   /* Number count-up: elements carrying data-count animate 0 → value over 900ms */
@@ -1917,44 +1542,47 @@
     var habits = computeHabits(trades);
     var shot   = longestShot(trades);
     var top    = teams[0] || null;
+    var bracket = exitBracket(top);
 
     /* ── 1 · OPENER ── */
     slides.push({
       el: makeSlide(
         pitch("pitch--spin") +
         '<div class="glow glow-gold-pulse"></div>',
-        eyebrowRule(tr("a_record")) +
+        eyebrowRule("Your 2026 World Cup") +
         '<div class="sl-mega mega-rec fx-hero">' +
           '<span data-count="' + stats.wins + '">0</span>–<span data-count="' + stats.losses + '">0</span>' +
         "</div>" +
-        '<div class="sl-sub fx" style="animation-delay:320ms;font-size:18px">' +
-          escapeHTML(tr("win_rate", { rate: stats.winRate })) + "</div>" +
-        '<div class="sl-note fx" style="animation-delay:420ms">' +
-          stats.total + " " + escapeHTML(tr("a_placed_sub")) + "</div>"
+        '<div class="sl-sub fx" style="animation-delay:320ms;font-size:18px">' + stats.winRate + "% win rate</div>" +
+        '<div class="persona fx" style="animation-delay:500ms">' + escapeHTML(winRateLine(stats.winRate)) + "</div>"
       ),
-      bg: "#0A1F1A", shareKey: "s1", shareVars: { W: stats.wins, L: stats.losses }
+      bg: "#0A1F1A",
+      shareText: stats.wins + "–" + stats.losses + " in the 2026 World Cup on Kalshi. What's yours? " + SHARE_URL + " #KalshiWrapped"
     });
 
     /* ── 2 · BETS PLACED ── */
     slides.push({
       el: makeSlide(
         pitch(),
-        eyebrowRule(tr("a_placed")) +
+        eyebrowRule("You placed") +
         '<div class="sl-mega mega-bets fx-hero" data-count="' + stats.total + '">0</div>' +
-        '<div class="sl-sub fx" style="animation-delay:320ms">' + escapeHTML(tr("a_placed_sub")) + "</div>"
+        '<div class="sl-sub fx" style="animation-delay:320ms">bets this tournament</div>'
       ),
-      bg: "#0D2B1F", shareKey: "s2", shareVars: { n: stats.total }
+      bg: "#0D2B1F",
+      shareText: "I placed " + stats.total + " bets on the 2026 World Cup. " + SHARE_URL + " #KalshiWrapped"
     });
 
-    /* ── 3 · QUESTION: TEAMS ── */
+    /* ── 3 · STATEMENT: TEAMS ── */
     if (teams.length) {
       slides.push({
         el: makeSlide(
           pitch() + '<div class="deco ball-deco">' + BALL_SVG + "</div>",
-          eyebrowRule(tr("q_eyebrow"), true) + questionHTML("q_teams"),
+          eyebrowRule("2026 World Cup", true) +
+          statementHTML("You had opinions on a lot of teams this tournament."),
           { q: true, tapHint: true }
         ),
-        bg: "#0A1F1A", shareKey: "s4", shareVars: { n: teams.length }
+        bg: "#0A1F1A",
+        shareText: "I backed " + teams.length + " teams this World Cup. " + SHARE_URL + " #KalshiWrapped"
       });
     }
 
@@ -1962,7 +1590,7 @@
     if (teams.length) {
       var top3rows = teams.slice(0, 3).map(function (p, i) {
         return '<div class="team-row' + (i === 0 ? " team-row--top" : "") +
-          ' fx" style="animation-delay:' + (420 + i * 120) + 'ms">' +
+          ' fx" style="animation-delay:' + (520 + i * 120) + 'ms">' +
           '<span class="tr-flag">' + teamFlag(p.name) + "</span>" +
           '<span class="tr-name">' + escapeHTML(displayName(p.name)) + "</span>" +
           '<span class="tr-rec">' + p.wins + "W–" + p.losses + "L</span>" +
@@ -1971,32 +1599,38 @@
       slides.push({
         el: makeSlide(
           pitch(),
-          eyebrowRule(tr("a_record")) +
+          eyebrowRule("You backed") +
           '<div class="sl-mega mega-teams fx-hero" data-count="' + teams.length + '">0</div>' +
-          '<div class="sl-sub fx" style="animation-delay:320ms">' + escapeHTML(tr("a_teams")) + "</div>" +
+          '<div class="sl-sub fx" style="animation-delay:320ms">different teams</div>' +
+          '<div class="persona fx" style="animation-delay:400ms">' + escapeHTML(teamCountLine(teams.length)) + "</div>" +
           '<div class="team-rows">' + top3rows + "</div>"
         ),
-        bg: "#0D3526", shareKey: "s4", shareVars: { n: teams.length }
+        bg: "#0D3526",
+        shareText: "I backed " + teams.length + " teams this World Cup. " + SHARE_URL + " #KalshiWrapped"
       });
     }
 
     /* ── 5 · YOUR #1 TEAM ── */
     if (top) {
+      var topBracket = exitBracket(top);
+      var goldExit = topBracket.tone === "gold" || topBracket.label === "Runner-Up" || topBracket.label === "Semi-Finalist";
       slides.push({
         el: makeSlide(
           '<div class="glow glow-gold-c"></div>',
-          eyebrowRule(tr("a_top_team")) +
+          eyebrowRule("Your #1 team") +
           '<div class="top-flag fx-flag">' + teamFlag(top.name) + "</div>" +
           '<div class="top-name fx-hero">' + escapeHTML(displayName(top.name)) + "</div>" +
           '<div class="top-rec fx" style="animation-delay:320ms">' + top.wins + "W–" + top.losses + "L</div>" +
           (top.hasPnl
             ? '<div class="top-pnl fx ' + (top.pnl >= 0 ? "sl-gold" : "sl-flare") +
               '" style="animation-delay:420ms">' + signedMoney(top.pnl) + "</div>"
-            : ""),
+            : "") +
+          '<div class="top-exit fx' + (goldExit ? " top-exit--gold" : "") + '" style="animation-delay:520ms">' +
+            escapeHTML(topBracket.label) + "</div>" +
+          '<div class="top-exit-sub fx" style="animation-delay:620ms">' + escapeHTML(topBracket.sub) + "</div>"
         ),
         bg: "#1A0F00",
-        shareKey: "s5",
-        shareVars: { flag: teamFlag(top.name), team: displayName(top.name) }
+        shareText: teamFlag(top.name) + displayName(top.name) + " was my ride or die. " + top.wins + "–" + top.losses + ". " + SHARE_URL + " #KalshiWrapped"
       });
     }
 
@@ -2016,26 +1650,25 @@
       slides.push({
         el: makeSlide(
           pitch(),
-          eyebrowRule(tr("a_also")) +
+          eyebrowRule("Also in your corner") +
           '<div class="team-rows" style="max-width:420px">' + rows23 + "</div>"
         ),
         bg: "#0D3526",
-        shareKey: "s5",
-        shareVars: { flag: teamFlag(top.name), team: displayName(top.name) }
+        shareText: "My 2026 World Cup Wrapped. Generate yours. " + SHARE_URL + " #KalshiWrapped"
       });
     }
 
-    /* ── 7 · QUESTION: BUSIEST DAY ── */
+    /* ── 7 · STATEMENT: BUSIEST DAY ── */
     if (habits.busiestDay) {
       slides.push({
         el: makeSlide(
           pitch() + cornerFlags() + '<div class="glow glow-flare-bl"></div>',
-          eyebrowRule(tr("q_eyebrow"), true) + questionHTML("q_busiest"),
+          eyebrowRule("2026 World Cup", true) +
+          statementHTML("There was one day you were all in."),
           { q: true, tapHint: true }
         ),
         bg: "#150A00",
-        shareKey: "s8",
-        shareVars: { n: habits.busiestDay.count, date: fmtDay(habits.busiestDay.ts) }
+        shareText: habits.busiestDay.count + " bets on " + fmtDay(habits.busiestDay.ts) + ". I went all in. " + SHARE_URL + " #KalshiWrapped"
       });
     }
 
@@ -2048,16 +1681,15 @@
       slides.push({
         el: makeSlide(
           '<div class="glow glow-flare-bl"></div>',
-          eyebrowRule(tr("a_busiest")) +
+          eyebrowRule("Your busiest day") +
           '<div class="sl-mega mega-date fx-hero">' + escapeHTML(fmtDay(habits.busiestDay.ts)) + "</div>" +
           '<div class="sl-sub fx" style="animation-delay:320ms;font-size:22px">' +
-            '<span data-count="' + habits.busiestDay.count + '">0</span> ' + escapeHTML(tr("a_busiest_sub")) +
-          "</div>" +
+            '<span data-count="' + habits.busiestDay.count + '">0</span> bets placed</div>' +
+          '<div class="persona fx" style="animation-delay:400ms">' + escapeHTML(busiestLine(habits.busiestDay.count)) + "</div>" +
           '<div class="pills">' + pillsHTML + "</div>"
         ),
         bg: "#150800",
-        shareKey: "s8",
-        shareVars: { n: habits.busiestDay.count, date: fmtDay(habits.busiestDay.ts) }
+        shareText: habits.busiestDay.count + " bets on " + fmtDay(habits.busiestDay.ts) + ". I went all in. " + SHARE_URL + " #KalshiWrapped"
       });
     }
 
@@ -2066,28 +1698,27 @@
       slides.push({
         el: makeSlide(
           '<div class="glow glow-gold-r"></div>',
-          eyebrowRule(tr("a_bestday")) +
+          eyebrowRule("Your best day") +
           '<div class="sl-mega mega-day fx-hero" data-count="' + habits.bestDay.pnl + '" data-money="1" data-prefix="+">+$0.00</div>' +
           '<div class="sl-sub fx" style="animation-delay:320ms;font-size:22px">' + escapeHTML(fmtDay(habits.bestDay.ts)) + "</div>"
         ),
         bg: "#0D0D0D",
-        shareKey: "s9",
-        shareVars: { pnl: money(habits.bestDay.pnl), date: fmtDay(habits.bestDay.ts) }
+        shareText: "My 2026 World Cup Wrapped. Generate yours. " + SHARE_URL + " #KalshiWrapped"
       });
     }
 
-    /* ── 10 · QUESTION: BEST CALL ── */
+    /* ── 10 · STATEMENT: BEST CALL ── */
     if (stats.biggest) {
       slides.push({
         el: makeSlide(
           pitch() + '<div class="deco spotlight"></div>' +
           '<div class="emoji-deco" style="bottom:10%;right:8%;font-size:100px;opacity:0.05">🏆</div>',
-          eyebrowRule(tr("q_eyebrow"), true) + questionHTML("q_bestcall"),
+          eyebrowRule("2026 World Cup", true) +
+          statementHTML("One call stood above the rest."),
           { q: true, tapHint: true }
         ),
         bg: "#0A1200",
-        shareKey: "s11",
-        shareVars: { pnl: money(stats.biggest.pnl), market: cleanTicker(stats.biggest.ticker) }
+        shareText: "+" + money(stats.biggest.pnl) + " on " + cleanTicker(stats.biggest.ticker) + ". Biggest call of my World Cup. " + SHARE_URL + " #KalshiWrapped"
       });
     }
 
@@ -2096,28 +1727,28 @@
       slides.push({
         el: makeSlide(
           '<div class="glow glow-gold-strong"></div>',
-          eyebrowRule(tr("a_bestcall")) +
+          eyebrowRule("Your best call") +
           '<div class="sl-mega mega-call fx-hero" data-count="' + stats.biggest.pnl + '" data-money="1" data-prefix="+">+$0.00</div>' +
           '<div class="sl-sub fx" style="animation-delay:320ms;font-size:18px">' +
-            escapeHTML(truncate(cleanTicker(stats.biggest.ticker), 42)) + "</div>"
+            escapeHTML(truncate(cleanTicker(stats.biggest.ticker), 42)) + "</div>" +
+          '<div class="persona fx" style="animation-delay:400ms">' + escapeHTML(bestCallLine(stats.biggest.pnl)) + "</div>"
         ),
         bg: "#0F1A00",
-        shareKey: "s11",
-        shareVars: { pnl: money(stats.biggest.pnl), market: cleanTicker(stats.biggest.ticker) }
+        shareText: "+" + money(stats.biggest.pnl) + " on " + cleanTicker(stats.biggest.ticker) + ". Biggest call of my World Cup. " + SHARE_URL + " #KalshiWrapped"
       });
     }
 
-    /* ── 12 · QUESTION: LONGSHOT (skipped without one) ── */
+    /* ── 12 · STATEMENT: LONGSHOT ── */
     if (shot) {
       slides.push({
         el: makeSlide(
           pitch() + stars(),
-          eyebrowRule(tr("q_eyebrow"), true) + questionHTML("q_longshot"),
+          eyebrowRule("2026 World Cup", true) +
+          statementHTML("You took a chance nobody else would."),
           { q: true, tapHint: true }
         ),
         bg: "#0A0A1A",
-        shareKey: "s13",
-        shareVars: { odds: Math.round(shot.prob * 100) }
+        shareText: Math.round(shot.prob * 100) + "¢ longshot. Nobody saw that coming. " + SHARE_URL + " #KalshiWrapped"
       });
     }
 
@@ -2127,29 +1758,28 @@
       slides.push({
         el: makeSlide(
           pitch(),
-          eyebrowRule(tr("a_longshot_pre")) +
+          eyebrowRule("The odds were") +
           '<div class="sl-mega mega-odds fx-hero" data-count="' + odds + '" data-suffix="¢">0¢</div>' +
           '<div class="sl-sub fx" style="animation-delay:320ms;font-size:18px">' +
             escapeHTML(truncate(cleanTicker(shot.ticker), 42)) + "</div>" +
-          '<div class="sl-sub fx" style="animation-delay:580ms;font-style:italic;font-size:17px;color:var(--chalk)">' +
-            escapeHTML(tr("a_longshot_sub")) + "</div>"
+          '<div class="sl-sub fx" style="animation-delay:580ms;font-style:italic;font-size:17px;color:var(--chalk)">Nobody saw that coming.</div>'
         ),
         bg: "#0A1F1A",
-        shareKey: "s13",
-        shareVars: { odds: odds }
+        shareText: odds + "¢ longshot. Nobody saw that coming. " + SHARE_URL + " #KalshiWrapped"
       });
     }
 
-    /* ── 14 · QUESTION: SHARPNESS ── */
+    /* ── 14 · STATEMENT: SHARPNESS ── */
     if (stats.calibration !== null) {
       slides.push({
         el: makeSlide(
           pitch() + '<div class="deco crosshair">' + CROSSHAIR_SVG + "</div>",
-          eyebrowRule(tr("q_eyebrow"), true) + questionHTML("q_sharp"),
+          eyebrowRule("2026 World Cup", true) +
+          statementHTML("Here's how sharp your reads actually were."),
           { q: true, tapHint: true }
         ),
         bg: "#0A1A2B",
-        shareKey: "s15", shareVars: { cal: stats.calibration }
+        shareText: stats.calibration + "/100 sharpness. Locked in all tournament. " + SHARE_URL + " #KalshiWrapped"
       });
     }
 
@@ -2157,14 +1787,15 @@
     if (stats.calibration !== null) {
       var s15 = makeSlide(
         '<div class="deco crosshair">' + CROSSHAIR_SVG + "</div>",
-        eyebrowRule(tr("q_sharp")) +
+        eyebrowRule("Your sharpness score") +
         '<div class="sl-mega mega-sharp fx-hero" data-count="' + stats.calibration + '">0</div>' +
         '<div class="sharp-track fx" style="animation-delay:380ms"><div class="sharp-fill"></div></div>' +
-        '<div class="sl-sub fx" style="animation-delay:680ms;font-size:17px">' + escapeHTML(tr("a_sharp_sub")) + "</div>"
+        '<div class="sl-sub fx" style="animation-delay:680ms;font-size:17px">out of 100</div>' +
+        '<div class="persona fx" style="animation-delay:800ms">' + escapeHTML(sharpLine(stats.calibration)) + "</div>"
       );
       slides.push({
         el: s15, bg: "#0A1A2B",
-        shareKey: "s15", shareVars: { cal: stats.calibration },
+        shareText: stats.calibration + "/100 sharpness. Locked in all tournament. " + SHARE_URL + " #KalshiWrapped",
         onEnter: function () {
           var fill = s15.querySelector(".sharp-fill");
           fill.style.width = "0%";
@@ -2175,140 +1806,93 @@
       });
     }
 
-    /* ── 16 · FULL TEAM TABLE ── */
+    /* ── 16 · TOP TEAMS PODIUM ── */
     if (teams.length) {
-      var tableRows = teams.map(function (p, i) {
+      var visible = teams.slice(0, 10);
+      var listRows = visible.map(function (p, i) {
         var pnlCell = p.hasPnl
-          ? '<td class="' + (p.pnl >= 0 ? "pnl-pos" : "pnl-neg") + '">' + signedMoney(p.pnl) + "</td>"
-          : "<td>—</td>";
-        return "<tr" + (i === 0 ? ' class="tt-top"' : "") + ">" +
-          '<td class="td-name"><span class="tt-flag">' + teamFlag(p.name) + "</span>" +
-            escapeHTML(displayName(p.name)) + "</td>" +
-          "<td>" + p.count + "</td>" +
-          "<td>" + p.wins + "–" + p.losses + "</td>" +
-          pnlCell + "</tr>";
+          ? '<span class="rank-pnl ' + (p.pnl >= 0 ? "sl-gold" : "sl-flare") + '">' + signedMoney(p.pnl) + "</span>"
+          : '<span class="rank-pnl" style="color:var(--muted)">—</span>';
+        return '<div class="rank-row' + (i === 0 ? " rank-row--top" : "") +
+          ' fx" style="animation-delay:' + (250 + i * 60) + 'ms">' +
+          '<span class="rank-num">' + (i + 1) + "</span>" +
+          '<span class="rank-flag">' + teamFlag(p.name) + "</span>" +
+          '<span class="rank-name">' + escapeHTML(displayName(p.name)) + "</span>" +
+          '<span class="rank-rec">' + p.wins + "–" + p.losses + "</span>" +
+          pnlCell +
+          "</div>";
       }).join("");
+      var moreHTML = teams.length > 10
+        ? '<div class="rank-more fx" style="animation-delay:' + (250 + 10 * 60) + 'ms">and ' + (teams.length - 10) + " more</div>"
+        : "";
       var s16 = makeSlide(
         pitch("pitch--faint"),
-        '<div class="table-wrap">' +
-          eyebrowRule(tr("a_allteams")) +
-          '<div class="table-scroll fx" style="animation-delay:250ms"><table class="team-table">' +
-            "<thead><tr>" +
-              "<th>" + escapeHTML(tr("th_team")) + "</th>" +
-              "<th>" + escapeHTML(tr("th_bets")) + "</th>" +
-              "<th>" + escapeHTML(tr("th_record")) + "</th>" +
-              "<th>" + escapeHTML(tr("th_pnl")) + "</th>" +
-            "</tr></thead>" +
-            "<tbody>" + tableRows + "</tbody>" +
-          "</table></div>" +
-        "</div>",
-        { table: true }
+        eyebrowRule("Every team you backed") +
+        '<div class="rank-list">' + listRows + "</div>" +
+        moreHTML
       );
-      var scroller = s16.querySelector(".table-scroll");
-      ["click", "touchstart", "touchmove", "touchend"].forEach(function (ev) {
-        scroller.addEventListener(ev, function (e) { e.stopPropagation(); });
+      var ranker = s16.querySelector(".rank-list");
+      ["click", "touchstart", "touchend"].forEach(function (ev) {
+        ranker.addEventListener(ev, function (e) { e.stopPropagation(); });
       });
-      slides.push({ el: s16, bg: "#0A1F1A", shareKey: "s17", shareVars: {} });
+      slides.push({
+        el: s16, bg: "#0A1F1A",
+        shareText: "My 2026 World Cup Wrapped. Generate yours. " + SHARE_URL + " #KalshiWrapped"
+      });
     }
 
-    /* ── 17 · SUMMARY + SHARE ── */
+    /* ── 17 · FINAL "THAT'S A WRAP" ── */
+    var toneColor = { gold: "var(--gold)", chalk: "var(--chalk)", muted: "var(--muted)", flare: "var(--flare)" }[bracket.tone] || "var(--chalk)";
     var s17 = makeSlide(
-      pitch("pitch--faint"),
-      '<div class="fx-hero"><div class="card-glow"><div class="ticket" id="ticket">' +
-        '<div class="ticket-top">' +
-          '<div class="ticket-head"><span class="badge">Match Report</span><span class="handle">@TRADER</span></div>' +
-          '<div class="record-row"><div class="record" id="tkRecord"></div>' +
-            '<div class="record-label">Record<br>(W–L)</div></div>' +
-          '<p class="rate-line" id="tkRateLine"></p>' +
-          '<div class="tags" id="tkTags"></div>' +
-        "</div>" +
-        '<div class="perf" aria-hidden="true"></div>' +
-        '<div class="ticket-bottom">' +
-          '<div class="stat-grid">' +
-            '<div class="stat stat--gold"><div class="stat-label">Biggest call</div>' +
-              '<div class="stat-value" id="tkBigCall">—</div><div class="stat-sub" id="tkBigCallSub"></div></div>' +
-            '<div class="stat stat--flare"><div class="stat-label">Current streak</div>' +
-              '<div class="stat-value" id="tkStreak">—</div><div class="stat-sub" id="tkStreakSub"></div></div>' +
-            '<div class="stat stat--wide">' +
-              '<div class="cal-head"><div class="stat-label">Calibration</div>' +
-                '<div class="cal-score" id="tkCalScore">—</div></div>' +
-              '<div class="cal-track"><div class="cal-fill" id="tkCalFill"></div></div>' +
-              '<div class="cal-note" id="tkCalNote"></div></div>' +
-          "</div>" +
-          '<div class="ticket-foot"><span class="date-range" id="tkDateRange">All-time</span>' +
-            '<span class="wordmark">MATCH REPORT</span></div>' +
-        "</div>" +
-      "</div></div></div>" +
-      '<div class="show-actions fx" style="animation-delay:320ms">' +
-        '<button class="btn-dl" id="downloadBtn">' + escapeHTML(tr("btn_download")) + "</button>" +
-        '<button class="btn-share2" id="shareCardBtn">' + escapeHTML(tr("btn_share")) + "</button>" +
-        '<button class="btn-replay" id="replayBtn">' + escapeHTML(tr("btn_again")) + "</button>" +
+      pitch("pitch--faint pitch--spin"),
+      eyebrowRule("Your 2026 World Cup") +
+      '<div class="exit-label fx-hero" style="color:' + toneColor + '">' + escapeHTML(bracket.label.toUpperCase()) + "</div>" +
+      '<div class="exit-sub fx" style="animation-delay:320ms">' + escapeHTML(bracket.sub) + "</div>" +
+      '<div class="final-record fx" style="animation-delay:420ms">' +
+        stats.wins + "–" + stats.losses + " · " + stats.winRate + "% win rate</div>" +
+      '<div class="final-tag fx" style="animation-delay:520ms">#KALSHIWRAPPED</div>' +
+      '<div class="show-actions fx" style="animation-delay:620ms">' +
+        '<button class="btn-dl" id="downloadBtn">Download</button>' +
+        '<button class="btn-share2" id="shareCardBtn">Share</button>' +
+        '<button class="btn-replay" id="replayBtn">Play again</button>' +
       "</div>" +
-      '<div class="final-wordmark fx" style="animation-delay:420ms">MATCH REPORT</div>' +
-      '<div class="final-unofficial fx" style="animation-delay:520ms">Unofficial. Not affiliated with Kalshi.</div>',
+      '<div class="final-unofficial fx" style="animation-delay:720ms">Unofficial. Not affiliated with Kalshi.</div>',
       { scroll: true }
     );
-    renderTicket(s17, stats);
-    slides.push({ el: s17, bg: "#0A1F1A", shareKey: "s17", shareVars: {} });
+    var s17def = {
+      el: s17, bg: "#0A1F1A",
+      shareText: "My 2026 World Cup Wrapped. Generate yours. " + SHARE_URL + " #KalshiWrapped"
+    };
+    slides.push(s17def);
 
     s17.querySelector("#downloadBtn").addEventListener("click", function () {
-      html2canvas(s17.querySelector(".ticket"), { backgroundColor: null, scale: 3, useCORS: true })
+      shareBtn.style.opacity = "0";
+      shareBtn.style.pointerEvents = "none";
+      exitBtn.style.opacity = "0";
+      exitBtn.style.pointerEvents = "none";
+      s17.style.background = s17def.bg;
+      html2canvas(s17, { backgroundColor: null, scale: 3, useCORS: true })
         .then(function (canvas) {
+          shareBtn.style.opacity = "";
+          shareBtn.style.pointerEvents = "";
+          exitBtn.style.opacity = "";
+          exitBtn.style.pointerEvents = "";
+          s17.style.background = "";
           var a = document.createElement("a");
-          a.download = "match-report-2026.png";
+          a.download = "kalshi-wrapped-2026.png";
           a.href = canvas.toDataURL("image/png");
           a.click();
         })
-        .catch(function () {});
+        .catch(function () {
+          shareBtn.style.opacity = "";
+          shareBtn.style.pointerEvents = "";
+          exitBtn.style.opacity = "";
+          exitBtn.style.pointerEvents = "";
+          s17.style.background = "";
+        });
     });
     s17.querySelector("#shareCardBtn").addEventListener("click", shareCurrentSlide);
     s17.querySelector("#replayBtn").addEventListener("click", function () { goTo(0); });
-  }
-
-  function renderTicket(root, stats) {
-    root.querySelector("#tkRecord").textContent = stats.wins + "–" + stats.losses;
-    root.querySelector("#tkRateLine").innerHTML =
-      "<strong>" + stats.winRate + "% win rate</strong> across " + stats.total +
-      (stats.total === 1 ? " trade" : " trades");
-
-    var tags = root.querySelector("#tkTags");
-    tags.innerHTML = "";
-    stats.categories.forEach(function (c) {
-      var el = document.createElement("span");
-      el.className = "tag";
-      el.textContent = truncate(c, 12);
-      tags.appendChild(el);
-    });
-
-    var bigCall = root.querySelector("#tkBigCall");
-    var bigCallSub = root.querySelector("#tkBigCallSub");
-    if (stats.biggest) {
-      bigCall.textContent = "+" + money(stats.biggest.pnl);
-      bigCallSub.textContent = stats.biggest.ticker ? truncate(cleanTicker(stats.biggest.ticker), 28) : "";
-    } else {
-      bigCall.textContent = "—";
-      bigCallSub.textContent = "";
-    }
-
-    root.querySelector("#tkStreak").textContent =
-      stats.streakLen + (stats.streakWon ? "W" : "L");
-    root.querySelector("#tkStreakSub").textContent =
-      stats.streakLen === 1 ? "" : (stats.streakWon ? "wins" : "losses") + " in a row";
-
-    var calScore = root.querySelector("#tkCalScore");
-    var calFill  = root.querySelector("#tkCalFill");
-    var calNote  = root.querySelector("#tkCalNote");
-    if (stats.calibration !== null) {
-      calScore.textContent = stats.calibration;
-      calFill.style.width = stats.calibration + "%";
-      calNote.textContent = "0–100 · " + stats.calibrationTrades + " priced trades";
-    } else {
-      calScore.textContent = "—";
-      calFill.style.width = "50%";
-      calNote.textContent = "";
-    }
-
-    root.querySelector("#tkDateRange").textContent = stats.dateRange;
   }
 
   /* ---------- Navigation ---------- */
@@ -2348,7 +1932,7 @@
         timer: setTimeout(function () {
           prevEl.classList.remove("is-exiting", "to-right");
           pendingExit = null;
-        }, 240)
+        }, 220)
       };
     }
 
@@ -2373,9 +1957,9 @@
     generateBtn.focus();
   }
 
-  /* Tap zones: right 60% forward, left 40% back. Buttons + table excluded. */
+  /* Tap zones: right 60% forward, left 40% back. Buttons + list excluded. */
   show.addEventListener("click", function (e) {
-    if (e.target.closest("button, a, .table-scroll")) return;
+    if (e.target.closest("button, a, .rank-list")) return;
     var x = e.clientX / window.innerWidth;
     if (x <= 0.40) goTo(slideIndex - 1);
     else goTo(slideIndex + 1);
@@ -2390,14 +1974,12 @@
 
   exitBtn.addEventListener("click", closeShow);
 
-  /* ---------- Share: PNG of the current slide + translated copy ---------- */
+  /* ---------- Share ---------- */
   function shareCurrentSlide() {
     var def = slides[slideIndex];
     if (!def) return;
-    var text = trShare(def.shareKey, def.shareVars) + " " + SHARE_URL;
     var fname = "wc-wrapped-slide" + (slideIndex + 1) + ".png";
 
-    // Hide chrome so it doesn't appear in the capture
     shareBtn.style.opacity = "0";
     shareBtn.style.pointerEvents = "none";
     exitBtn.style.opacity = "0";
@@ -2419,7 +2001,7 @@
           if (!blob) return;
           var file = new File([blob], fname, { type: "image/png" });
           if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
-            navigator.share({ files: [file], text: text }).catch(function () {});
+            navigator.share({ files: [file], text: def.shareText }).catch(function () {});
           } else {
             var a = document.createElement("a");
             a.download = fname;
