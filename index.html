@@ -1008,6 +1008,23 @@
     var cols = {};
     Object.keys(COLUMN_KEYWORDS).forEach(function (key) {
       cols[key] = -1;
+      // Priority match for the ticker: "market_ticker" must win over
+      // headers like "Market_Title" that the generic "market" keyword
+      // would otherwise claim first.
+      if (key === "ticker") {
+        for (var j = 0; j < headerRow.length; j++) {
+          if (String(headerRow[j]).toLowerCase().trim().includes("market_ticker")) { cols[key] = j; break; }
+        }
+        if (cols[key] !== -1) return;
+      }
+      // Same for the result: an exact "result" header must win over the
+      // often-empty "Status" column that the generic keyword scan hits first.
+      if (key === "result") {
+        for (var m = 0; m < headerRow.length; m++) {
+          if (String(headerRow[m]).toLowerCase().trim() === "result") { cols[key] = m; break; }
+        }
+        if (cols[key] !== -1) return;
+      }
       var keywords = COLUMN_KEYWORDS[key];
       for (var i = 0; i < headerRow.length; i++) {
         var h = String(headerRow[i]).toLowerCase().trim();
@@ -1035,16 +1052,17 @@
   }
 
   function classifyRow(row, cols) {
-    // Prefer numeric P&L; fall back to result keywords; otherwise skip.
+    // Prefer nonzero numeric P&L; a zero P&L (Kalshi reports losses as
+    // "0.00") falls through to the result column. Skip only when neither
+    // column can classify the row.
     if (cols.pnl !== -1) {
       var p = parseMoney(row[cols.pnl]);
       if (!isNaN(p) && p !== 0) return { won: p > 0, pnl: p };
-      if (!isNaN(p) && p === 0) return null; // a scratch — don't guess
     }
     if (cols.result !== -1) {
-      var r = String(row[cols.result] || "").toLowerCase();
-      if (/\bwin\b|\bwon\b|settled[_\s-]*win/.test(r) || r === "win" || r.includes("won")) return { won: true, pnl: NaN };
-      if (/\blos/.test(r)) return { won: false, pnl: NaN };
+      var r = String(row[cols.result] || "").toLowerCase().trim();
+      if (/\bwin\b|\bwon\b|settled[_\s-]*win/.test(r) || r === "win" || r.includes("won") || r === "yes") return { won: true, pnl: NaN };
+      if (/\blos/.test(r) || r === "no") return { won: false, pnl: NaN };
     }
     return null;
   }
@@ -1538,11 +1556,18 @@
     stage.innerHTML = "";
     slides = [];
 
-    var teams  = topPicks(trades, Infinity);
+    // Team slides are World Cup only — esports, NBA, tennis, UFC and any
+    // other non-KXWC series stay out. The overall record keeps everything.
+    var wcTrades = trades.filter(function (t) { return /^KXWC/i.test(String(t.ticker || "").trim()); });
+    var teams  = topPicks(wcTrades, Infinity);
+    // TIE/DRAW picks count toward the record, but are never shown as a
+    // "team" on the team breakdown slides.
+    var realTeams = teams.filter(function (p) { return p.name !== "TIE" && p.name !== "DRAW"; });
     var habits = computeHabits(trades);
     var shot   = longestShot(trades);
-    var top    = teams[0] || null;
-    var bracket = exitBracket(top);
+    var top    = realTeams[0] || null;
+    // The exit bracket still honours a TIE-heavy record (Draw Specialist).
+    var bracket = exitBracket(teams[0] || null);
 
     /* ── 1 · OPENER ── */
     slides.push({
@@ -1573,7 +1598,7 @@
     });
 
     /* ── 3 · STATEMENT: TEAMS ── */
-    if (teams.length) {
+    if (realTeams.length) {
       slides.push({
         el: makeSlide(
           pitch() + '<div class="deco ball-deco">' + BALL_SVG + "</div>",
@@ -1582,13 +1607,13 @@
           { q: true, tapHint: true }
         ),
         bg: "#0A1F1A",
-        shareText: "I backed " + teams.length + " teams this World Cup. " + SHARE_URL + " #KalshiWrapped"
+        shareText: "I backed " + realTeams.length + " teams this World Cup. " + SHARE_URL + " #KalshiWrapped"
       });
     }
 
     /* ── 4 · ANSWER: TEAM COUNT ── */
-    if (teams.length) {
-      var top3rows = teams.slice(0, 3).map(function (p, i) {
+    if (realTeams.length) {
+      var top3rows = realTeams.slice(0, 3).map(function (p, i) {
         return '<div class="team-row' + (i === 0 ? " team-row--top" : "") +
           ' fx" style="animation-delay:' + (520 + i * 120) + 'ms">' +
           '<span class="tr-flag">' + teamFlag(p.name) + "</span>" +
@@ -1600,13 +1625,13 @@
         el: makeSlide(
           pitch(),
           eyebrowRule("You backed") +
-          '<div class="sl-mega mega-teams fx-hero" data-count="' + teams.length + '">0</div>' +
+          '<div class="sl-mega mega-teams fx-hero" data-count="' + realTeams.length + '">0</div>' +
           '<div class="sl-sub fx" style="animation-delay:320ms">different teams</div>' +
-          '<div class="persona fx" style="animation-delay:400ms">' + escapeHTML(teamCountLine(teams.length)) + "</div>" +
+          '<div class="persona fx" style="animation-delay:400ms">' + escapeHTML(teamCountLine(realTeams.length)) + "</div>" +
           '<div class="team-rows">' + top3rows + "</div>"
         ),
         bg: "#0D3526",
-        shareText: "I backed " + teams.length + " teams this World Cup. " + SHARE_URL + " #KalshiWrapped"
+        shareText: "I backed " + realTeams.length + " teams this World Cup. " + SHARE_URL + " #KalshiWrapped"
       });
     }
 
@@ -1621,9 +1646,8 @@
           '<div class="top-flag fx-flag">' + teamFlag(top.name) + "</div>" +
           '<div class="top-name fx-hero">' + escapeHTML(displayName(top.name)) + "</div>" +
           '<div class="top-rec fx" style="animation-delay:320ms">' + top.wins + "W–" + top.losses + "L</div>" +
-          (top.hasPnl
-            ? '<div class="top-pnl fx ' + (top.pnl >= 0 ? "sl-gold" : "sl-flare") +
-              '" style="animation-delay:420ms">' + signedMoney(top.pnl) + "</div>"
+          (top.hasPnl && top.pnl > 0
+            ? '<div class="top-pnl fx sl-gold" style="animation-delay:420ms">+' + money(top.pnl) + "</div>"
             : "") +
           '<div class="top-exit fx' + (goldExit ? " top-exit--gold" : "") + '" style="animation-delay:520ms">' +
             escapeHTML(topBracket.label) + "</div>" +
@@ -1635,10 +1659,10 @@
     }
 
     /* ── 6 · #2 AND #3 TEAMS ── */
-    if (teams.length >= 3) {
-      var rows23 = teams.slice(1, 3).map(function (p, i) {
-        var pnlHTML = p.hasPnl
-          ? '<span class="tr-pnl ' + (p.pnl >= 0 ? "sl-gold" : "sl-flare") + '">' + signedMoney(p.pnl) + "</span>"
+    if (realTeams.length >= 3) {
+      var rows23 = realTeams.slice(1, 3).map(function (p, i) {
+        var pnlHTML = p.hasPnl && p.pnl > 0
+          ? '<span class="tr-pnl sl-gold">+' + money(p.pnl) + "</span>"
           : "";
         return '<div class="team-row team-row--big fx" style="animation-delay:' + (250 + i * 200) + 'ms">' +
           '<span class="tr-flag">' + teamFlag(p.name) + "</span>" +
@@ -1807,12 +1831,12 @@
     }
 
     /* ── 16 · TOP TEAMS PODIUM ── */
-    if (teams.length) {
-      var visible = teams.slice(0, 10);
+    if (realTeams.length) {
+      var visible = realTeams.slice(0, 10);
       var listRows = visible.map(function (p, i) {
-        var pnlCell = p.hasPnl
-          ? '<span class="rank-pnl ' + (p.pnl >= 0 ? "sl-gold" : "sl-flare") + '">' + signedMoney(p.pnl) + "</span>"
-          : '<span class="rank-pnl" style="color:var(--muted)">—</span>';
+        var pnlCell = p.hasPnl && p.pnl > 0
+          ? '<span class="rank-pnl sl-gold">+' + money(p.pnl) + "</span>"
+          : '<span class="rank-pnl"></span>';
         return '<div class="rank-row' + (i === 0 ? " rank-row--top" : "") +
           ' fx" style="animation-delay:' + (250 + i * 60) + 'ms">' +
           '<span class="rank-num">' + (i + 1) + "</span>" +
@@ -1822,8 +1846,8 @@
           pnlCell +
           "</div>";
       }).join("");
-      var moreHTML = teams.length > 10
-        ? '<div class="rank-more fx" style="animation-delay:' + (250 + 10 * 60) + 'ms">and ' + (teams.length - 10) + " more</div>"
+      var moreHTML = realTeams.length > 10
+        ? '<div class="rank-more fx" style="animation-delay:' + (250 + 10 * 60) + 'ms">and ' + (realTeams.length - 10) + " more</div>"
         : "";
       var s16 = makeSlide(
         pitch("pitch--faint"),
