@@ -453,6 +453,84 @@
     margin-top: 10px;
   }
 
+  /* ---------- Intro slide ---------- */
+  .intro-glow {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(231, 179, 65, 0.18), transparent);
+    opacity: 0;
+  }
+  .slide.is-active .intro-glow { animation: introGlow 2000ms ease-in both; }
+  @keyframes introGlow { from { opacity: 0; } to { opacity: 1; } }
+
+  .intro-el { opacity: 0; }
+  .slide.is-exiting .intro-el, .slide.is-exiting .intro-glow { opacity: 1; animation: none; }
+
+  .intro-ball { font-size: 64px; line-height: 1; }
+  .slide.is-active .intro-ball { animation: introBall 600ms cubic-bezier(0.2, 0.8, 0.2, 1) 300ms both; }
+  @keyframes introBall {
+    from { opacity: 0; transform: scale(0.5); }
+    to   { opacity: 1; transform: none; }
+  }
+
+  .intro-t1 {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: clamp(36px, 6vw, 64px);
+    color: #7FA593;
+    letter-spacing: 0.06em;
+    line-height: 1;
+    margin-top: 20px;
+  }
+  .intro-t2 {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: clamp(52px, 9vw, 96px);
+    color: #F4EFE1;
+    letter-spacing: 0.04em;
+    line-height: 0.95;
+    margin-top: 8px;
+  }
+  .intro-t3 {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: clamp(52px, 9vw, 96px);
+    color: #E7B341;
+    letter-spacing: 0.04em;
+    line-height: 0.95;
+    margin-top: 4px;
+  }
+  .slide.is-active .intro-t1 { animation: introLine 500ms cubic-bezier(0.2, 0.8, 0.2, 1) 700ms both; }
+  .slide.is-active .intro-t2 { animation: introLine 500ms cubic-bezier(0.2, 0.8, 0.2, 1) 1000ms both; }
+  .slide.is-active .intro-t3 { animation: introLine 500ms cubic-bezier(0.2, 0.8, 0.2, 1) 1300ms both; }
+  @keyframes introLine {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: none; }
+  }
+
+  .intro-rule {
+    width: 60px;
+    height: 2px;
+    background: #E7B341;
+    border-radius: 2px;
+    margin-top: 24px;
+  }
+  .slide.is-active .intro-rule { animation: introFade 400ms ease 1600ms both; }
+  @keyframes introFade { from { opacity: 0; } to { opacity: 1; } }
+
+  .intro-tap {
+    font-family: "Inter", sans-serif;
+    font-size: 14px;
+    color: #7FA593;
+    margin-top: 28px;
+  }
+  .slide.is-active .intro-tap {
+    animation: introTapIn 400ms ease 2000ms both, introTapPulse 2s ease-in-out 2400ms infinite;
+  }
+  @keyframes introTapIn { from { opacity: 0; } to { opacity: 0.8; } }
+  @keyframes introTapPulse {
+    0%, 100% { opacity: 0.8; }
+    50%      { opacity: 0.3; }
+  }
+
   .tap-hint {
     position: absolute;
     bottom: 40px;
@@ -1569,6 +1647,24 @@
     // The exit bracket still honours a TIE-heavy record (Draw Specialist).
     var bracket = exitBracket(teams[0] || null);
 
+    /* ── 0 · CINEMATIC INTRO ── */
+    slides.push({
+      el: makeSlide(
+        pitch("pitch--faint pitch--spin") +
+        '<div class="intro-glow"></div>',
+        '<div class="intro-ball intro-el">⚽</div>' +
+        '<div class="intro-t1 intro-el">YOUR 2026</div>' +
+        '<div class="intro-t2 intro-el">WORLD CUP</div>' +
+        '<div class="intro-t3 intro-el">WRAPPED</div>' +
+        '<div class="intro-rule intro-el"></div>' +
+        '<div class="intro-tap intro-el">Tap to begin</div>'
+      ),
+      bg: "#0A1F1A",
+      isIntro: true,
+      noShare: true,
+      shareText: "My 2026 World Cup Wrapped. Generate yours. " + SHARE_URL + " #KalshiWrapped"
+    });
+
     /* ── 1 · OPENER ── */
     slides.push({
       el: makeSlide(
@@ -1938,7 +2034,8 @@
     slideIndex = i;
 
     show.style.backgroundColor = next.bg;
-    progressFill.style.width = ((i + 1) / slides.length) * 100 + "%";
+    progressFill.style.width = next.isIntro ? "0%" : ((i + 1) / slides.length) * 100 + "%";
+    shareBtn.style.display = next.noShare ? "none" : "";
 
     if (pendingExit) {
       clearTimeout(pendingExit.timer);
@@ -1984,6 +2081,8 @@
   /* Tap zones: right 60% forward, left 40% back. Buttons + list excluded. */
   show.addEventListener("click", function (e) {
     if (e.target.closest("button, a, .rank-list")) return;
+    // The intro advances on a tap anywhere — no back zone.
+    if (activeDef && activeDef.isIntro) { goTo(slideIndex + 1); return; }
     var x = e.clientX / window.innerWidth;
     if (x <= 0.40) goTo(slideIndex - 1);
     else goTo(slideIndex + 1);
