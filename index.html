@@ -63,11 +63,12 @@
   @keyframes rise {
     from { opacity: 0; transform: translateY(14px); }
   }
-  .eyebrow, h1, .subhead, .panel { animation: rise 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+  .eyebrow, h1, .subhead, .demo-row, .panel { animation: rise 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
   .eyebrow  { animation-delay: 0.05s; }
   h1        { animation-delay: 0.14s; }
   .subhead  { animation-delay: 0.24s; }
-  .panel    { animation-delay: 0.34s; }
+  .demo-row { animation-delay: 0.30s; }
+  .panel    { animation-delay: 0.38s; }
 
   .page {
     max-width: 560px;
@@ -101,7 +102,7 @@
     text-align: center;
     text-wrap: balance;
   }
-  h1 .line-2 { display: block; color: var(--gold); }
+  h1 .line-2 { display: block; color: var(--flare); }
 
   .subhead {
     margin-top: 20px;
@@ -234,6 +235,72 @@
   .cta:hover { filter: brightness(1.06); }
   .cta:active { transform: scale(0.99); }
   .cta:focus-visible { outline: 2px solid var(--chalk); outline-offset: 2px; }
+
+  /* ---------- Live demo ---------- */
+  .demo-row {
+    margin: 22px auto 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 9px;
+  }
+  .demo-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    background: rgba(231, 179, 65, 0.09);
+    color: var(--gold);
+    border: 1px solid rgba(231, 179, 65, 0.42);
+    border-radius: 999px;
+    padding: 12px 22px;
+    font-family: "Inter", sans-serif;
+    font-size: 14.5px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    cursor: pointer;
+    transition: background-color 140ms ease, border-color 140ms ease, transform 120ms ease;
+  }
+  .demo-btn:hover {
+    background: rgba(231, 179, 65, 0.16);
+    border-color: rgba(231, 179, 65, 0.7);
+  }
+  .demo-btn:active { transform: scale(0.985); }
+  .demo-btn:focus-visible { outline: 2px solid var(--chalk); outline-offset: 3px; }
+  .demo-btn .demo-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--gold);
+    box-shadow: 0 0 0 0 rgba(231, 179, 65, 0.55);
+    animation: demoPulse 2s ease-out infinite;
+  }
+  @keyframes demoPulse {
+    0%   { box-shadow: 0 0 0 0 rgba(231, 179, 65, 0.5); }
+    70%  { box-shadow: 0 0 0 7px rgba(231, 179, 65, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(231, 179, 65, 0); }
+  }
+  .demo-note {
+    color: var(--muted);
+    font-size: 12.5px;
+    letter-spacing: 0.01em;
+  }
+  .or-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    max-width: 420px;
+    margin: 22px auto 0;
+    color: var(--muted);
+    font-size: 11.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  .or-divider::before, .or-divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: rgba(127, 165, 147, 0.22);
+  }
 
   .error {
     display: none;
@@ -852,6 +919,16 @@
   </h1>
 
   <p class="subhead">All your 2026 Kalshi trades, wrapped.</p>
+
+  <div class="demo-row">
+    <button class="demo-btn" id="demoBtn">
+      <span class="demo-dot" aria-hidden="true"></span>
+      Watch the live demo
+    </button>
+    <span class="demo-note">Real export, sample trader. No file needed.</span>
+  </div>
+
+  <div class="or-divider">or use your own</div>
 
   <section class="panel" aria-label="Trade data input">
     <div class="dropzone" id="dropzone" role="button" tabindex="0" aria-label="Drop a CSV file here, or click to choose one">
@@ -1509,6 +1586,7 @@
   var dzFile      = document.getElementById("dzFile");
   var csvText     = document.getElementById("csvText");
   var generateBtn = document.getElementById("generateBtn");
+  var demoBtn     = document.getElementById("demoBtn");
   var errorBox    = document.getElementById("errorBox");
 
   function showError(msg) {
@@ -2141,9 +2219,47 @@
   /* ============================================================
      Generate — parse input, compute stats, launch the show
   ============================================================ */
-  generateBtn.addEventListener("click", function () {
+  /* ============================================================
+     Sample export — powers the live demo button.
+     A real Kalshi settlements export from a sample trader, so the
+     demo runs through the exact same parser as a real upload.
+  ============================================================ */
+  var SAMPLE_CSV = `"type","Status","Amount_In_Dollars","Original_Date","Traded_Time","Last_Updated","Deposit_Type","Fee_In_Dollars","Market_Title","Market_Ticker","Market_Id","Filled","Remaining","Direction","Order_Type","Price_In_Cents","No_Contracts_Owned","No_Contracts_Average_Price_In_Cents","Yes_Contracts_Owned","Yes_Contracts_Average_Price_In_Cents","Result","Profit_In_Dollars","Credit_Reason","Credit_Type","Introducing_Broker"
+"Settlement","","","2026-07-11T20:00:00.000Z","","","","0.18","","KXWCGAME-26JUL11NORENG-ENG","","","","","","17","","","120.00","17.00","yes","98.56","","",""
+"Settlement","","","2026-07-09T19:00:00.000Z","","","","0.22","","KXWCGAME-26JUL09FRAMOR-FRA","","","","","","82","","","85.00","82.00","yes","14.45","","",""
+"Settlement","","","2026-07-07T19:00:00.000Z","","","","0.31","","KXWCGAME-26JUL07ARGEGY-ARG","","","","","","68","","","200.00","68.00","yes","59.69","","",""
+"Settlement","","","2026-07-05T19:00:00.000Z","","","","0.19","","KXWCGAME-26JUL05ESPBEL-ESP","","","","","","71","","","100.00","71.00","yes","28.81","","",""
+"Settlement","","","2026-07-05T15:00:00.000Z","","","","0.09","","KXWCGAME-26JUL05ENGSVK-ENG","","","","","","78","","","50.00","78.00","yes","10.91","","",""
+"Settlement","","","2026-07-03T19:00:00.000Z","","","","0.14","","KXWCGAME-26JUL03ARGCPV-ARG","","","","","","85","","","75.00","85.00","yes","11.11","","",""
+"Settlement","","","2026-07-03T15:00:00.000Z","","","","0.08","","KXWCGAME-26JUL03COLMAR-MAR","","","","","","34","","","60.00","34.00","no","0.00","","",""
+"Settlement","","","2026-07-02T19:00:00.000Z","","","","0.21","","KXWCGAME-26JUL02ESPAUT-ESP","","","","","","87","","","150.00","87.00","yes","19.29","","",""
+"Settlement","","","2026-07-02T15:00:00.000Z","","","","0.17","","KXWCGAME-26JUL02PORCRO-POR","","","","","","72","","","100.00","72.00","yes","27.83","","",""
+"Settlement","","","2026-07-01T19:00:00.000Z","","","","0.11","","KXWCGAME-26JUL01ENGCOD-ENG","","","","","","76","","","80.00","76.00","yes","19.09","","",""
+"Settlement","","","2026-07-01T15:00:00.000Z","","","","0.13","","KXWCGAME-26JUL01BELSEN-BEL","","","","","","65","","","90.00","65.00","yes","31.37","","",""
+"Settlement","","","2026-06-30T19:00:00.000Z","","","","0.09","","KXWCGAME-26JUN30FRÁSWE-FRA","","","","","","81","","","60.00","81.00","yes","11.31","","",""
+"Settlement","","","2026-06-30T15:00:00.000Z","","","","0.16","","KXWCGAME-26JUN30MEXECU-MEX","","","","","","73","","","110.00","73.00","yes","29.54","","",""
+"Settlement","","","2026-06-29T19:00:00.000Z","","","","0.28","","KXWCGAME-26JUN29BRAMOR-MAR","","","","","","18","","","180.00","18.00","yes","147.32","","",""
+"Settlement","","","2026-06-29T15:00:00.000Z","","","","0.12","","KXWCGAME-26JUN29BRAJPN-BRA","","","","","","74","","","80.00","74.00","yes","20.68","","",""
+"Settlement","","","2026-06-28T19:00:00.000Z","","","","0.07","","KXWCGAME-26JUN28CANSAF-CAN","","","","","","61","","","50.00","61.00","yes","19.43","","",""
+"Settlement","","","2026-06-27T19:00:00.000Z","","","","0.19","","KXWCGAME-26JUN27COLUGY-COL","","","","","","58","","","120.00","58.00","yes","50.21","","",""
+"Settlement","","","2026-06-25T19:00:00.000Z","","","","0.23","","KXWCGAME-26JUN25NEDTUN-NED","","","","","","88","","","130.00","88.00","yes","15.37","","",""
+"Settlement","","","2026-06-25T15:00:00.000Z","","","","0.31","","KXWCGAME-26JUN25TURUSA-TUR","","","","","","38","","","200.00","38.00","yes","123.69","","",""
+"Settlement","","","2026-06-24T19:00:00.000Z","","","","0.14","","KXWCGAME-26JUN24MEXCZE-MEX","","","","","","79","","","90.00","79.00","yes","18.76","","",""
+"Settlement","","","2026-06-24T15:00:00.000Z","","","","0.09","","KXWCGAME-26JUN24SCOBRA-BRA","","","","","","89","","","60.00","89.00","no","0.00","","",""
+"Settlement","","","2026-06-22T19:00:00.000Z","","","","0.18","","KXWCGAME-26JUN22GERECU-GER","","","","","","21","","","120.00","21.00","no","0.00","","",""
+"Settlement","","","2026-06-21T19:00:00.000Z","","","","0.11","","KXWCGAME-26JUN21URUCPV-URU","","","","","","62","","","75.00","62.00","no","0.00","","",""
+"Settlement","","","2026-06-20T19:00:00.000Z","","","","0.08","","KXWCGAME-26JUN20GERCIV-GER","","","","","","69","","","55.00","69.00","yes","16.97","","",""
+"Settlement","","","2026-06-20T15:00:00.000Z","","","","0.22","","KXWCGAME-26JUN20JPNSWE-JPN","","","","","","12","","","150.00","12.00","yes","131.78","","",""
+"Settlement","","","2026-06-19T19:00:00.000Z","","","","0.17","","KXWCGAME-26JUN19USAAUS-USA","","","","","","71","","","100.00","71.00","yes","28.83","","",""
+"Settlement","","","2026-06-19T15:00:00.000Z","","","","0.13","","KXWCGAME-26JUN19SCOBRA-BRA","","","","","","91","","","80.00","91.00","no","0.00","","",""
+"Settlement","","","2026-06-18T19:00:00.000Z","","","","0.09","","KXWCGAME-26JUN18MEXKOR-MEX","","","","","","66","","","60.00","66.00","yes","20.31","","",""
+"Settlement","","","2026-06-14T19:00:00.000Z","","","","0.11","","KXWCGAME-26JUN14GERCUR-GER","","","","","","93","","","70.00","93.00","yes","4.79","","",""
+"Settlement","","","2026-06-13T19:00:00.000Z","","","","0.33","","KXWCGAME-26JUN13BRAMOR-MAR","","","","","","22","","","220.00","22.00","no","0.00","","",""`;
+
+  /* Shared pipeline: raw text in, slideshow out. */
+  function runFromRaw(raw) {
     clearError();
-    var raw = csvText.value.trim();
+    raw = String(raw || "").trim();
 
     if (!raw) {
       showError("There's nothing to read yet. Drop a CSV file above or paste your export into the box.");
@@ -2159,7 +2275,7 @@
       try {
         parsed = JSON.parse(raw);
       } catch (e) {
-        showError("This looks like JSON but couldn't be parsed — it may be cut off. Make sure you copied the full API response, or paste your CSV export instead.");
+        showError("This looks like JSON but couldn't be parsed \u2014 it may be cut off. Make sure you copied the full API response, or paste your CSV export instead.");
         return;
       }
       var settlements = extractSettlements(parsed);
@@ -2192,7 +2308,18 @@
 
     buildSlides(stats, trades);
     openShow();
+  }
+
+  generateBtn.addEventListener("click", function () {
+    runFromRaw(csvText.value);
   });
+
+  if (demoBtn) {
+    demoBtn.addEventListener("click", function () {
+      runFromRaw(SAMPLE_CSV);
+    });
+  }
+
 })();
 </script>
 </body>
